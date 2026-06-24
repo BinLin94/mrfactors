@@ -133,11 +133,10 @@ calcPricesProducer <- function(products = "kcr", calculation = "VoP", weighting 
       # get new mapping
       mappingFAO <- toolGetMapping("FAOitems_online_2010update.csv", type = "sectoral", where = "mrfaocore")
 
-      # LivePrim merged into LiveHead (Production_Crops_Livestock) in 2024.
+      # FAO merged LivePrim into Production_Crops_Livestock in 2024; use LiveHead2024.
       # New format already uses post2010 item names (e.g. "882|Raw milk of cattle"),
       # so no pre2010->post2010 remapping is needed.
-      # weightProd <- collapseNames(readSource("FAO_online", "LivePrim")[, , "production"])
-      weightProd <- collapseNames(readSource("FAO_online", "LiveHead")[, , "Production_(t)"])
+      weightProd <- collapseNames(readSource("FAO_online", "LiveHead2024")[, , "Production_(t)"])
       if (weighting == "production") {
         itemsIntersect <- intersect(getNames(pricesProdFAO), unique(mappingFAO$post2010_ProductionItem))
         # Prod. of livestock primary prod

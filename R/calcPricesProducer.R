@@ -133,8 +133,7 @@ calcPricesProducer <- function(products = "kcr", calculation = "VoP", weighting 
       # get new mapping
       mappingFAO <- toolGetMapping("FAOitems_online_2010update.csv", type = "sectoral", where = "mrfaocore")
 
-      # FAO merged LivePrim into Production_Crops_Livestock in 2024; use LiveHead2024.
-      # New format already uses post2010 item names (e.g. "882|Raw milk of cattle"),
+      # QCL item names (e.g. "882|Raw milk of cattle") already match post2010_ProductionItem,
       # so no pre2010->post2010 remapping is needed.
       weightProd <- collapseNames(readSource("FAO_online", "LiveHead2024")[, , "Production_(t)"])
       if (weighting == "production") {
